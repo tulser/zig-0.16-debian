@@ -1,3 +1,4 @@
+zig-@ZIG_VERSION@ source: unknown-file-in-debian-source [debian/source/lintian-overrides.in]
 zig-@ZIG_VERSION@ source: source-contains-prebuilt-wasm-binary [stage1/zig1.wasm]
 zig-@ZIG_VERSION@ source: license-problem-non-free-RFC [lib/libc/include/generic-freebsd/netlink/netlink.h]
 # X: Pedantic

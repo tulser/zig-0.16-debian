@@ -21,7 +21,7 @@ Package: zig-0.16
 Architecture: any
 Multi-Arch: foreign
 Depends:
- libstd-zig0.16 (= ${source:Version}),
+ libstd-zig0.16-dev (= ${source:Version}),
  ${misc:Depends},
  ${shlibs:Depends},
 Suggests:

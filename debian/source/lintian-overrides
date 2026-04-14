@@ -1,0 +1,11 @@
+zig-0.16 source: unknown-file-in-debian-source [debian/source/lintian-overrides.in]
+zig-0.16 source: source-contains-prebuilt-wasm-binary [stage1/zig1.wasm]
+zig-0.16 source: license-problem-non-free-RFC [lib/libc/include/generic-freebsd/netlink/netlink.h]
+# X: Pedantic
+zig-0.16 source: very-long-line-length-in-source-file [lib/*]
+zig-0.16 source: very-long-line-length-in-source-file [test/cases/maximum_sized_integer_literal.zig]
+zig-0.16 source: very-long-line-length-in-source-file 1100 > 512 [doc/langref.html.in]
+zig-0.16 source: source-is-missing [lib/build-web/index.html]
+zig-0.16 source: source-is-missing [lib/docs/index.html]
+# Upstream releases are signed with `minisign`, which debian-watch does not yet support.
+zig-0.16 source: debian-watch-does-not-check-openpgp-signature [debian/watch]

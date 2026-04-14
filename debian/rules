@@ -24,7 +24,7 @@ export CCACHE_DISABLE := 1
 	dh $@ --buildsystem=cmake
 
 execute_before_dh_auto_configure:
-	ln -s /usr/lib/llvm-21/lib/clang/21/include/ lib
+	ln -s /usr/lib/llvm-$(LLVM_VERSION_MAJOR)/lib/clang/$(LLVM_VERSION_MAJOR)/include/ lib
 	# [A] Configure and generate debian files
 	for f in debian/*.in debian/tests/*.in debian/source/*.in; do \
 		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(ZIG_VERSION)/'); \
@@ -87,7 +87,7 @@ execute_before_dh_auto_clean:
 	rm -f lib/include
 
 execute_after_dh_auto_clean:
-	# Clean up generated debian files
+	# Clean up generated debian files [A]
 	for f in debian/*.in debian/tests/*.in; do \
 	    f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(ZIG_VERSION)/'); \
 	    case $$f2 in \

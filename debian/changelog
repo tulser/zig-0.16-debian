@@ -1,3 +1,10 @@
+zig-0.16 (0.16.0+dfsg2-2) experimental; urgency=medium
+
+  * Format files in `debian/`
+  * Add debian file generation
+
+ -- W. Connor Yates <self@wcyates.xyz>  Tue, 14 Apr 2026 16:08:51 -0400
+
 zig-0.16 (0.16.0+dfsg2-1) experimental; urgency=medium
 
   * Update copyright with moved `lib/tsan` to `lib/libtsan`
