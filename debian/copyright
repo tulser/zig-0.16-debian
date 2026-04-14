@@ -4,7 +4,7 @@ Upstream-Contact: Andrew Kelley <andrew@ziglang.org>
 Source: https://ziglang.org/
 # The following files contain vendored content, or are prebuilt binaries,
 # or are non-free, and are thus excluded from the Debianized tarball.
-Files-Excluded: lib/include lib/std/compress/testdata/rfc8478.txt lib/tsan
+Files-Excluded: lib/include lib/std/compress/testdata/rfc8478.txt lib/libtsan
 
 Files: *
 Copyright: 2015-2025 Zig contributors
@@ -33,9 +33,9 @@ License: Expat
 # It's not strictly necessary, but common practice makes the Debian packaging
 # author explicit with its own stanza.
 Files: debian/*
-Copyright: 2025 nick black <dank@debian.org>
+Copyright: 2026 W. Connor Yates <self@wcyates.xyz>
+           2025 nick black <dank@debian.org>
            2024 Nick Hastings <nicholaschastings@gmail.com>
-           2025 W. Connor Yates <self@wcyates.xyz>
 License: Expat
 
 Files: lib/*
