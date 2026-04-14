@@ -4,7 +4,7 @@ Version: 5
 # https://ziglang.org/download/0.16.0/zig-0.16.0.tar.xz
 # https://ziglang.org/download/0.16.0/zig-0.16.0.tar.xz.minisig
 Source: https://codeberg.org/ziglang/zig/tags/
-Matching-Pattern: https://codeberg.org/ziglang/zig/archive/(0.16.[0-9\.]*)@ARCHIVE_EXT@
+Matching-Pattern: https://codeberg.org/ziglang/zig/archive/(@ZIG_VERSION@.[0-9\.]*)@ARCHIVE_EXT@
 Dversion-Mangle: auto
 Repack: yes
 Repack-Suffix: +dfsg

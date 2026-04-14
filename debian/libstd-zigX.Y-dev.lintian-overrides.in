@@ -1,0 +1,6 @@
+libstd-zig@ZIG_VERSION@-dev: national-encoding [usr/lib/zig-@ZIG_VERSION@/lib/libc/include/any-windows-any/ddk/ide.h]
+libstd-zig@ZIG_VERSION@-dev: national-encoding [usr/lib/zig-@ZIG_VERSION@/lib/libc/include/generic-netbsd/netinet/dccp.h]
+libstd-zig@ZIG_VERSION@-dev: national-encoding [usr/lib/zig-@ZIG_VERSION@/lib/libc/mingw/math/x86/log10l.S]
+libstd-zig@ZIG_VERSION@-dev: national-encoding [usr/lib/zig-@ZIG_VERSION@/lib/libc/mingw/math/x86/log1pl.S]
+libstd-zig@ZIG_VERSION@-dev: national-encoding [usr/lib/zig-@ZIG_VERSION@/lib/libc/mingw/math/x86/log2l.S]
+libstd-zig@ZIG_VERSION@-dev: repeated-path-segment aro [usr/lib/zig-@ZIG_VERSION@/lib/compiler/aro/aro/]

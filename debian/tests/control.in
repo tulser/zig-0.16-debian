@@ -1,7 +1,7 @@
 # ensure we can run the binary we just installed
-Test-Command: /usr/lib/zig-0.16/bin/zig --help
+Test-Command: /usr/lib/zig-@ZIG_VERSION@/bin/zig --help
 Depends:
- zig-0.16,
+ zig-@ZIG_VERSION@,
 Restrictions:
  allow-stderr,
 Features:

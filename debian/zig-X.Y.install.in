@@ -1,0 +1,2 @@
+usr/bin/zig usr/lib/zig-@ZIG_VERSION@/bin
+usr/share/man/man1/zig-@ZIG_VERSION@.1 usr/share/man/man1

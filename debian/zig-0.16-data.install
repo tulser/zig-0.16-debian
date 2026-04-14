@@ -1,2 +1,0 @@
-usr/lib/zig/* usr/lib/zig-${env:ZIG_VERSION}/lib
-usr/share/doc/zig-${env:ZIG_VERSION} usr/share/doc

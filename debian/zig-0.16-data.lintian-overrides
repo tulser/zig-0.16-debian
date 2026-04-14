@@ -1,6 +1,0 @@
-zig-0.16-data: spare-manual-page [usr/share/man/man1/zig-0.16.1.gz]
-zig-0.16-data: national-encoding [usr/lib/zig-0.16/lib/libc/include/any-windows-any/ddk/ide.h]
-zig-0.16-data: national-encoding [usr/lib/zig-0.16/lib/libc/include/generic-netbsd/netinet/dccp.h]
-zig-0.16-data: national-encoding [usr/lib/zig-0.16/lib/libc/mingw/math/x86/log10l.S]
-zig-0.16-data: national-encoding [usr/lib/zig-0.16/lib/libc/mingw/math/x86/log1pl.S]
-zig-0.16-data: national-encoding [usr/lib/zig-0.16/lib/libc/mingw/math/x86/log2l.S]

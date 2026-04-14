@@ -358,6 +358,7 @@ Copyright: 2012-2013, ARM Ltd
 License: GPL-2
 
 Files: lib/libc/include/any-linux-any/drm/exynos_drm.h
+       lib/libc/include/any-linux-any/fwctl/cxl.h
        lib/libc/include/any-linux-any/linux/apm_bios.h
        lib/libc/include/any-linux-any/linux/aspeed-lpc-ctrl.h
        lib/libc/include/any-linux-any/linux/aspeed-p2a-ctrl.h
@@ -380,7 +381,6 @@ Files: lib/libc/include/any-linux-any/drm/exynos_drm.h
        lib/libc/include/any-linux-any/linux/if_arcnet.h
        lib/libc/include/any-linux-any/linux/if_arp.h
        lib/libc/include/any-linux-any/linux/if_bridge.h
-       lib/libc/include/any-linux-any/linux/if_cablemodem.h
        lib/libc/include/any-linux-any/linux/if_ether.h
        lib/libc/include/any-linux-any/linux/if_fc.h
        lib/libc/include/any-linux-any/linux/if_fddi.h
@@ -402,7 +402,6 @@ Files: lib/libc/include/any-linux-any/drm/exynos_drm.h
        lib/libc/include/any-linux-any/linux/ivtvfb.h
        lib/libc/include/any-linux-any/linux/joystick.h
        lib/libc/include/any-linux-any/linux/keyctl.h
-       lib/libc/include/any-linux-any/linux/meye.h
        lib/libc/include/any-linux-any/linux/mpls_iptunnel.h
        lib/libc/include/any-linux-any/linux/ncsi.h
        lib/libc/include/any-linux-any/linux/net.h
@@ -438,12 +437,10 @@ Files: lib/libc/include/any-linux-any/drm/exynos_drm.h
        lib/libc/include/any-linux-any/linux/uleds.h
        lib/libc/include/any-linux-any/linux/usb/g_printer.h
        lib/libc/include/any-linux-any/linux/usbdevice_fs.h
-       lib/libc/include/any-linux-any/misc/cxl.h
        lib/libc/include/any-linux-any/mtd/mtd-abi.h
        lib/libc/include/any-linux-any/mtd/mtd-user.h
        lib/libc/include/any-linux-any/mtd/nftl-user.h
        lib/libc/include/any-linux-any/mtd/ubi-user.h
-       lib/libc/include/any-linux-any/scsi/cxlflash_ioctl.h
        lib/libc/include/any-linux-any/sound/asequencer.h
        lib/libc/include/any-linux-any/sound/asound.h
        lib/libc/include/any-linux-any/sound/asound_fm.h
@@ -605,10 +602,6 @@ Copyright: 1997-2018, Apple Computer, Inc
            1992-1995, NeXT Computer, Inc
            1988-1996, NeXT Software, Inc
 License: APSL-2
-
-Files: lib/libc/include/aarch64-macos.1?-gnu/libkern/arm/*
-Copyright: 1999-2007, Apple Inc.
-License: Expat
 
 Files: lib/libc/include/any-darwin-any/_locale.h
        lib/libc/include/any-darwin-any/ar.h

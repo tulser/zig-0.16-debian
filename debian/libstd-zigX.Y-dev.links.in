@@ -1,0 +1,1 @@
+/usr/lib/llvm-@LLVM_VERSION_MAJOR@/lib/clang/@LLVM_VERSION_MAJOR@/include/ /usr/lib/zig-@ZIG_VERSION@/lib/include

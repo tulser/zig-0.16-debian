@@ -13,6 +13,8 @@ SED_ZIG_VERSION_LONG = sed -re '/git/bx ; $(SED_ZIG_VERSION_LONG_RE) ; :x ; $(SE
 export ZIG_VERSION := $(shell echo '$(DEB_VERSION_UPSTREAM)' | $(SED_ZIG_VERSION))
 export ZIG_LONG_VERSION := $(shell echo '$(DEB_VERSION_UPSTREAM)' | $(SED_ZIG_VERSION_LONG))
 
+LLVM_VERSION_MAJOR := 21
+
 export DEB_BUILD_MAINT_OPTIONS := hardening=+all
 
 # Set to prevent ccache inflation when building zig2
@@ -21,8 +23,20 @@ export CCACHE_DISABLE := 1
 %:
 	dh $@ --buildsystem=cmake
 
-override_dh_auto_configure:
+execute_before_dh_auto_configure:
 	ln -s /usr/lib/llvm-21/lib/clang/21/include/ lib
+	# [A] Configure and generate debian files
+	for f in debian/*.in debian/tests/*.in debian/source/*.in; do \
+		f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(ZIG_VERSION)/'); \
+		echo "$$f => $$f2"; \
+		sed \
+			-e 's|@ZIG_VERSION@|$(ZIG_VERSION)|g' \
+			-e 's|@LLVM_VERSION_MAJOR@|$(LLVM_VERSION_MAJOR)|g' \
+			$$f > $$f2; \
+	done
+	sed -i -e "s| *$$||" debian/control
+
+override_dh_auto_configure:
 	# without specifying MCPU, it targets native
 	#	we want to specify -DZIG_TARGET_TRIPLE=$(DEB_HOST_MULTIARCH), but it breaks PIE
 	#	so we have -DZIG_TARGET_MCPU=$(DEB_HOST_GNU_CPU)
@@ -42,13 +56,27 @@ export BBASE := obj-$(DEB_HOST_MULTIARCH)/stage3
 
 # make a man page and move the docs to usr/share/doc
 override_dh_auto_install:
+	# Generate man file for compiler
 	mkdir -p debian/tmp/usr/share/man/man1
 	help2man -s 1 -N -n "zig compiler and build tool" -v version $(BBASE)/bin/zig -o debian/tmp/usr/share/man/man1/zig-$(ZIG_VERSION).1
+	# Move zig doc viewer files
 	mkdir -p debian/tmp/usr/share/doc/zig-$(ZIG_VERSION)
 	mv $(BBASE)/lib/zig/docs/* debian/tmp/usr/share/doc/zig-$(ZIG_VERSION)/
 	rmdir $(BBASE)/lib/zig/docs
+	
 	dh_auto_install
+	# Unset compiler runpath
 	chrpath -d debian/tmp/usr/bin/zig
+	# Remove empty testdata dirs
+	for dir in \
+	  lib/std/compress/flate/testdata \
+	  lib/std/compress/lzma/testdata \
+	  lib/std/compress/testdata \
+	  lib/std/compress/xz/testdata \
+	  lib/std/tar/testdata \
+	  lib/std/tz; do \
+		rm -f debian/tmp/usr/$$dir; \
+	done
 
 execute_before_dh_auto_test:
 	$(BBASE)/bin/zig test test/behavior.zig
@@ -57,3 +85,15 @@ execute_before_dh_auto_clean:
 	rm -rf .cache/
 	rm -rf .zig-cache/
 	rm -f lib/include
+
+execute_after_dh_auto_clean:
+	# Clean up generated debian files
+	for f in debian/*.in debian/tests/*.in; do \
+	    f2=$$(echo $$f | sed 's/\.in$$//;s/X\.Y/$(ZIG_VERSION)/'); \
+	    case $$f2 in \
+		debian/control|debian/watch) \
+			echo "keep $$f2";; \
+		*) \
+			rm -f $$f2; \
+	    esac; \
+	done
