@@ -55,4 +55,5 @@ execute_before_dh_auto_test:
 
 execute_before_dh_auto_clean:
 	rm -rf .cache/
+	rm -rf .zig-cache/
 	rm -f lib/include
