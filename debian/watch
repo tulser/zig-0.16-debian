@@ -7,7 +7,7 @@ Source: https://codeberg.org/ziglang/zig/tags/
 Matching-Pattern: https://codeberg.org/ziglang/zig/archive/(0.16.[0-9\.]*)@ARCHIVE_EXT@
 Dversion-Mangle: auto
 Repack: yes
-Repacksuffix: +dfsg
+Repack-Suffix: +dfsg
 ## FIXME: Tarballs are signed with minisign, which is presently unsupported
 ## `upstream/signing-key` has the minisign key to verify the upstream tarballs
 #Pgp-Sig-Url-Mangle: s/$/.minisig/
