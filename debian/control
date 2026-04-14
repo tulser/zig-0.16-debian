@@ -1,0 +1,43 @@
+Source: zig-0.16
+Maintainer: W. Connor Yates <self@wcyates.xyz>
+Build-Depends: chrpath,
+               cmake (>= 3.15),
+               debhelper-compat (= 13),
+               help2man,
+               clang-21,
+               libclang-21-dev,
+               libclang-cpp21-dev,
+               liblld-21-dev,
+               llvm-21-dev,
+               pkgconf
+Standards-Version: 4.7.4
+Section: devel
+Homepage: https://ziglang.org/
+Vcs-Browser: https://salsa.debian.org/zig-team/zig-0.15
+Vcs-Git: https://salsa.debian.org/zig-team/zig-0.15.git
+
+Package: zig-0.16
+Architecture: any
+Multi-Arch: foreign
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         zig-0.16-data (= ${source:Version}),
+Suggests: zig
+Description: General-purpose imperative language
+ Zig is a general-purpose programming language and toolchain
+ for maintaining robust, optimal and reusable software.
+ .
+ This package contains the binary for Zig.
+
+Package: zig-0.16-data
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends},
+        libclang-common-21-dev
+Recommends: zig-0.16
+Enhances: zig-0.16
+Description: General-purpose imperative language (stdlib)
+ Zig is a general-purpose programming language and toolchain
+ for maintaining robust, optimal and reusable software.
+ .
+ This package contains the Zig standard library.

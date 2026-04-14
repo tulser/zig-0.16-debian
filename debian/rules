@@ -1,0 +1,58 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/pkg-info.mk
+include /usr/share/dpkg/vendor.mk
+include /usr/share/dpkg/architecture.mk
+
+SED_ZIG_VERSION := sed -re 's/^([^.]+)\.([^.]+)\..*/\1.\2/'
+SED_ZIG_VERSION_LONG_RE := s/^([^.]+)\.([^.]+)\.([^.]+).*/\1.\2.\3/
+# Accounts for potential nightly/dev releases
+SED_ZIG_VERSION_LONG_NIGHTLY_RE := s/^([^.]+)\.([^.]+)\.([^.]+)~git([^.]+)\.([^\+]+)\+dfsg/\1.\2.\3-dev.\4+\5/
+SED_ZIG_VERSION_LONG = sed -re '/git/bx ; $(SED_ZIG_VERSION_LONG_RE) ; :x ; $(SED_ZIG_VERSION_LONG_NIGHTLY_RE)'
+
+export ZIG_VERSION := $(shell echo '$(DEB_VERSION_UPSTREAM)' | $(SED_ZIG_VERSION))
+export ZIG_LONG_VERSION := $(shell echo '$(DEB_VERSION_UPSTREAM)' | $(SED_ZIG_VERSION_LONG))
+
+export DEB_BUILD_MAINT_OPTIONS := hardening=+all
+
+# Set to prevent ccache inflation when building zig2
+export CCACHE_DISABLE := 1
+
+%:
+	dh $@ --buildsystem=cmake
+
+override_dh_auto_configure:
+	ln -s /usr/lib/llvm-21/lib/clang/21/include/ lib
+	# without specifying MCPU, it targets native
+	#	we want to specify -DZIG_TARGET_TRIPLE=$(DEB_HOST_MULTIARCH), but it breaks PIE
+	#	so we have -DZIG_TARGET_MCPU=$(DEB_HOST_GNU_CPU)
+	# Also, if -DZIG_TARGET_TRIPLE is not "native", -DZIG_USE_LLVM_CONFIG must be "ON"
+	# 	as the find scripts will demand the LLVM static libs, which has issues
+	dh_auto_configure -- \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DZIG_RELEASE_SAFE=OFF \
+		-DZIG_VERSION=$(ZIG_LONG_VERSION) \
+		-DZIG_PIE=ON \
+		-DZIG_SHARED_LLVM=ON \
+		-DZIG_USE_LLVM_CONFIG=ON \
+		-DZIG_TARGET_MCPU=$(DEB_HOST_GNU_CPU)
+
+# output of build is stage3/bin and stage3/lib
+export BBASE := obj-$(DEB_HOST_MULTIARCH)/stage3
+
+# make a man page and move the docs to usr/share/doc
+override_dh_auto_install:
+	mkdir -p debian/tmp/usr/share/man/man1
+	help2man -s 1 -N -n "zig compiler and build tool" -v version $(BBASE)/bin/zig -o debian/tmp/usr/share/man/man1/zig-$(ZIG_VERSION).1
+	mkdir -p debian/tmp/usr/share/doc/zig-$(ZIG_VERSION)
+	mv $(BBASE)/lib/zig/docs/* debian/tmp/usr/share/doc/zig-$(ZIG_VERSION)/
+	rmdir $(BBASE)/lib/zig/docs
+	dh_auto_install
+	chrpath -d debian/tmp/usr/bin/zig
+
+execute_before_dh_auto_test:
+	$(BBASE)/bin/zig test test/behavior.zig
+
+execute_before_dh_auto_clean:
+	rm -rf .cache/
+	rm -f lib/include

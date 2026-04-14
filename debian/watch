@@ -1,0 +1,13 @@
+Version: 5
+
+# example URIs:
+# https://ziglang.org/download/0.16.0/zig-0.15.0.tar.xz
+# https://ziglang.org/download/0.16.0/zig-0.15.0.tar.xz.minisig
+Source: https://codeberg.org/ziglang/zig/tags/
+Matching-Pattern: https://codeberg.org/ziglang/zig/archive/(0.16.[0-9\.]*)@ARCHIVE_EXT@
+Dversion-Mangle: auto
+Repack: yes
+Repacksuffix: +dfsg
+## FIXME: Tarballs are signed with minisign, which is presently unsupported
+## `upstream/signing-key` has the minisign key to verify the upstream tarballs
+#Pgp-Sig-Url-Mangle: s/$/.minisig/
